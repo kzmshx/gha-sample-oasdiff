@@ -244,3 +244,23 @@ oasdiff \
 oasdiff の開発元が GitHub Action で oasdiff を実行する [oasdiff/oasdiff-action](https://github.com/oasdiff/oasdiff-action) のリポジトリを公開している。
 しかし、マーケットプレイスには該当のリポジトリに紐づいたアクションは存在せず、代わりに Deprecated になったリポジトリのほうのアクション（[openapi-spec-diff](https://github.com/marketplace/actions/openapi-spec-diff)）が残っていた。
 これを使うのも微妙なので、自前でワークフローを作ってみる。
+
+## 3. oasdiff を GitHub Action で実行する
+
+まず、単に oasdiff を実行するだけのワークフローを作る。
+oasdiff の開発元が Docker Hub 上に oasdiff の [Docker Image](https://hub.docker.com/r/tufin/oasdiff) を公開しているので、これを使う。
+
+```yaml
+jobs:
+  oasdiff-diff:
+    runs-on: ubuntu-latest
+    container:
+      image: tufin/oasdiff:stable
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          oasdiff \
+            -base https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore.yaml \
+            -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
+            -format text
+```
