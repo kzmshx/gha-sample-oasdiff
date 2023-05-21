@@ -244,3 +244,7 @@ oasdiff \
 oasdiff の開発元が GitHub Action で oasdiff を実行する [oasdiff/oasdiff-action](https://github.com/oasdiff/oasdiff-action) のリポジトリを公開している。
 しかし、マーケットプレイスには該当のリポジトリに紐づいたアクションは存在せず、代わりに Deprecated になったリポジトリのほうのアクション（[openapi-spec-diff](https://github.com/marketplace/actions/openapi-spec-diff)）が残っていた。
 これを使うのも微妙なので、自前でワークフローを作ってみる。
+
+## 3. oasdiff を GitHub Action で実行する
+
+まず、単に oasdiff を実行するだけのワークフロー。
