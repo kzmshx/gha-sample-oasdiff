@@ -23,8 +23,8 @@ brew install oasdiff
 
 ```shell
 oasdiff \
-  -base https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore.yaml \
-  -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
+  -base https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml \
+  -revision https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore-expanded.yaml \
   -format text
 ```
 
@@ -117,8 +117,8 @@ oasdiff は `-check-breaking` オプションを指定すると、API 仕様の�
 
 ```shell
 oasdiff \
-  -base https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore.yaml \
-  -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
+  -base https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml \
+  -revision https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore-expanded.yaml \
   -check-breaking \
   -format text
 ```
@@ -165,8 +165,8 @@ JSON で出力することもできる。
 
 ```shell
 oasdiff \
-  -base https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore.yaml \
-  -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
+  -base https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml \
+  -revision https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore-expanded.yaml \
   -check-breaking \
   -format json
 ```
