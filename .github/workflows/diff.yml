@@ -21,7 +21,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const result = ${{ steps.oasdiff-diff.outputs.result }};
+            const result = '${{ steps.oasdiff-diff.outputs.result }}';
             const issue_number = context.issue.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
@@ -59,7 +59,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const result = ${{ steps.oasdiff-check-breaking.outputs.result }};
+            const result = '${{ steps.oasdiff-check-breaking.outputs.result }}';
             const issue_number = context.issue.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
