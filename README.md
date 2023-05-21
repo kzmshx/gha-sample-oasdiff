@@ -264,3 +264,39 @@ jobs:
             -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
             -format text
 ```
+
+## 4. oasdiff の結果をレビューコメントとして出力する
+
+このままでは差分取得結果を確認するために actions/runs を見に行く必要があり不便なので、oasdiff の結果をレビューコメントとして出力するようにする。
+
+```yaml
+...
+      - run: |
+          oasdiff \
+            -base https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore.yaml \
+            -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
+            -format text >result.txt
+          echo "result=$(cat result.txt)" >>$GITHUB_OUTPUT
+        id: oasdiff-diff
+      - uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const result = ${{ steps.oasdiff-diff.outputs.result }};
+            const issue_number = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            const bodyPrefix = `<!-- oasdiff-diff-result -->`;
+            const body = `${bodyPrefix}
+            ## Changes
+            ${{ result }}`;
+
+            const { data: comments } = await github.rest.issues.listComments({ issue_number, owner, repo });
+            const comment_id = comments.find((c) => c.body.startsWith(bodyPrefix))?.id;
+            if (comment_id) {
+              await github.rest.issues.updateComment({ comment_id, issue_number, owner, repo, body });
+            } else {
+              await github.rest.issues.createComment({ issue_number, owner, repo, body });
+            }
+```
