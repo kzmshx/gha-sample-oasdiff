@@ -35,7 +35,7 @@ oasdiff \
 ```md
 ### New Endpoints: 1
 --------------------
-DELETE /pets/{petId}  
+DELETE /pets/{petId}
 
 ### Deleted Endpoints: None
 ---------------------------
@@ -129,31 +129,31 @@ oasdiff \
 
 ```text
 Backward compatibility errors (7):
-error	[added-required-request-body] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml	
+error	[added-required-request-body] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml
 	in API POST /pets
 		added required request body
 
-error	[response-success-status-removed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml	
+error	[response-success-status-removed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml
 	in API POST /pets
 		removed the success response with the status '201'
 
-error	[request-parameter-type-changed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml	
+error	[request-parameter-type-changed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml
 	in API GET /pets/{petId}
 		for the 'path' request parameter 'petId', the type/format was changed from 'string'/'none' to 'integer'/'int64'
 
-error	[response-body-type-changed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml	
+error	[response-body-type-changed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml
 	in API GET /pets/{petId}
 		the response's body type/format changed from 'object'/'none' to 'none'/'none' for status '200'
 
-error	[response-required-property-removed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml	
+error	[response-required-property-removed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml
 	in API GET /pets/{petId}
 		removed the required property 'id' from the response with the '200' status
 
-error	[response-required-property-removed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml	
+error	[response-required-property-removed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml
 	in API GET /pets/{petId}
 		removed the required property 'name' from the response with the '200' status
 
-warning	[optional-response-header-removed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml	
+warning	[optional-response-header-removed] at https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml
 	in API GET /pets
 		the optional response header 'x-next' removed for the status '200'
 ```
@@ -241,6 +241,6 @@ oasdiff \
 
 ## 2. oasdiff-action を使ってみようと思ったが Deprecated だった
 
-oasdiff の開発元が GitHub Action で oasdiff を実行する [oasdiff/oasdiff-action](https://github.com/oasdiff/oasdiff-action) のリポジトリを公開している。 
+oasdiff の開発元が GitHub Action で oasdiff を実行する [oasdiff/oasdiff-action](https://github.com/oasdiff/oasdiff-action) のリポジトリを公開している。
 しかし、マーケットプレイスには該当のリポジトリに紐づいたアクションは存在せず、代わりに Deprecated になったリポジトリのほうのアクション（[openapi-spec-diff](https://github.com/marketplace/actions/openapi-spec-diff)）が残っていた。
 これを使うのも微妙なので、自前でワークフローを作ってみる。
