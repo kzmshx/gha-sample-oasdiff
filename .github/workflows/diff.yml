@@ -1,0 +1,11 @@
+name: oasdiff
+on: [ pull_request,workflow_dispatch ]
+jobs:
+  oasdiff-diff:
+    runs-on: ubuntu-latest
+    container:
+      image: tufin/oasdiff:stable
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          ls
