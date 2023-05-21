@@ -26,7 +26,7 @@ jobs:
             const bodyPrefix = `<!-- oasdiff-diff-result -->`;
             const body = `${bodyPrefix}
             ## Changes
-            ${{ result }}`;
+            ${result}`;
 
             const { data: comments } = await github.rest.issues.listComments({ issue_number, owner, repo });
             const comment_id = comments.find((c) => c.body.startsWith(bodyPrefix))?.id;
@@ -60,7 +60,7 @@ jobs:
             const bodyPrefix = `<!-- oasdiff-check-breaking-result -->`;
             const body = `${bodyPrefix}
             ## Breaking Changes
-            ${{ result }}`;
+            ${result}`;
 
             const { data: comments } = await github.rest.issues.listComments({ issue_number, owner, repo });
             const comment_id = comments.find((c) => c.body.startsWith(bodyPrefix))?.id;
