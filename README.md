@@ -28,7 +28,9 @@ oasdiff \
   -format text
 ```
 
-すると、以下の結果が得られる。
+<details>
+<summary>出力</summary>
+<div>
 
 ```md
 ### New Endpoints: 1
@@ -108,6 +110,9 @@ Servers changed
 - Deleted server: http://petstore.swagger.io/v1
 ```
 
+</div>
+</details>
+
 oasdiff は `-check-breaking` オプションを指定すると、API 仕様の変更に含まれる破壊的変更を抽出してくれる。
 
 ```shell
@@ -118,7 +123,9 @@ oasdiff \
   -format text
 ```
 
-これは以下の結果を出力する。
+<details>
+<summary>出力</summary>
+<div>
 
 ```text
 Backward compatibility errors (7):
@@ -151,6 +158,9 @@ warning	[optional-response-header-removed] at https://github.com/OAI/OpenAPI-Spe
 		the optional response header 'x-next' removed for the status '200'
 ```
 
+</div>
+</details>
+
 JSON で出力することもできる。
 
 ```shell
@@ -160,6 +170,10 @@ oasdiff \
   -check-breaking \
   -format json
 ```
+
+<details>
+<summary>出力</summary>
+<div>
 
 ```json
 [
@@ -221,3 +235,6 @@ oasdiff \
   }
 ]
 ```
+
+</div>
+</details>
