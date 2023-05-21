@@ -13,9 +13,9 @@ jobs:
             -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
             -format text >result.txt
 
-          echo "result<<$EOF" >> $GITHUB_OUTPUT
+          echo "result<<EOF" >> $GITHUB_OUTPUT
           echo "$(cat result.txt)" >> $GITHUB_OUTPUT
-          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
         id: oasdiff-diff
       - uses: actions/github-script@v4
         with:
@@ -51,9 +51,9 @@ jobs:
             -check-breaking \
             -format text >result.txt
 
-          echo "result<<$EOF" >> $GITHUB_OUTPUT
+          echo "result<<EOF" >> $GITHUB_OUTPUT
           echo "$(cat result.txt)" >> $GITHUB_OUTPUT
-          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
         id: oasdiff-check-breaking
       - uses: actions/github-script@v4
         with:
