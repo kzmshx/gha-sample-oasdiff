@@ -13,15 +13,15 @@ jobs:
             -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
             -format text >result.txt
 
-          echo "result<<EOF" >> $GITHUB_OUTPUT
-          echo "$(cat result.txt)" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "OASDIFF_DIFF_RESULT<<EOF" >> $GITHUB_ENV
+          echo "$(cat result.txt)" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
         id: oasdiff-diff
       - uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const result = `${{ steps.oasdiff-diff.outputs.result }}`;
+            const result = process.env.OASDIFF_DIFF_RESULT;
             const issue_number = context.issue.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
@@ -51,15 +51,15 @@ jobs:
             -check-breaking \
             -format text >result.txt
 
-          echo "result<<EOF" >> $GITHUB_OUTPUT
-          echo "$(cat result.txt)" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          echo "OASDIFF_CHECK_BREAKING_RESULT<<EOF" >> $GITHUB_ENV
+          echo "$(cat result.txt)" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
         id: oasdiff-check-breaking
       - uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const result = `${{ steps.oasdiff-check-breaking.outputs.result }}`;
+            const result = process.env.OASDIFF_CHECK_BREAKING_RESULT;
             const issue_number = context.issue.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
