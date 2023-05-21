@@ -276,13 +276,16 @@ jobs:
             -base https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore.yaml \
             -revision https://github.com/OAI/OpenAPI-Specification/raw/main/examples/v3.0/petstore-expanded.yaml \
             -format text >result.txt
-          echo "result=$(cat result.txt)" >>$GITHUB_OUTPUT
+
+          echo "OASDIFF_DIFF_RESULT<<EOF" >> $GITHUB_ENV
+          echo "$(cat result.txt)" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
         id: oasdiff-diff
-      - uses: actions/github-script@v4
+      - uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const result = ${{ steps.oasdiff-diff.outputs.result }};
+            const result = process.env.OASDIFF_DIFF_RESULT;
             const issue_number = context.issue.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
@@ -290,7 +293,7 @@ jobs:
             const bodyPrefix = `<!-- oasdiff-diff-result -->`;
             const body = `${bodyPrefix}
             ## Changes
-            ${{ result }}`;
+            ${result}`;
 
             const { data: comments } = await github.rest.issues.listComments({ issue_number, owner, repo });
             const comment_id = comments.find((c) => c.body.startsWith(bodyPrefix))?.id;
